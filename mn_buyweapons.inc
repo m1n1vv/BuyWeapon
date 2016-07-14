@@ -1,6 +1,7 @@
 #if  defined MN_BUY_WEAPONS_INCLUDED_
 	#endinput
 #endif 
+
 #define MN_BUY_WEAPONS_INCLUDED_
 
 #if !defined MAX_WEAPON_NAME
