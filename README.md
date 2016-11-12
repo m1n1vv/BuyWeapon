@@ -1,5 +1,5 @@
 ![Image alt](http://pawn-wiki.ru/uploads/imgs/img_1466732388__bw-logo.png)
-> ###Версия: 0.3.6.1###
+> ###Версия: 0.3.6.2###
 
 Этот include добавляет покупку оружие с подробной информацией. Все действия будут происходишь в двух диалоговых окнах. В основном диалоге выводится вся информация об оружии. Если во время покупки система определит, что у вас в этом же слоте уже есть оружие, то высветится второй диалог, который предложит заменить.
 
@@ -46,4 +46,5 @@ switch(listitem)
 ||[**0.2.3**](https://github.com/m1n1vv/Pawn/blob/master/BuyWeapons/outdated_scripts/buy_weapons_0.2.inc)|0.3.4|
 |||0.3.5|
 |||0.3.6|
-|||[**0.3.6.1**](https://github.com/m1n1vv/BuyWeapons/blob/master/mn_buyweapons.inc)|
+|||0.3.6.1|
+|||[**0.3.6.2**](https://github.com/m1n1vv/BuyWeapons/blob/master/mn_buyweapons.inc)|
