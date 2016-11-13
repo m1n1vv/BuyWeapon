@@ -46,7 +46,7 @@ static const
         !"7,62 мм",
         !"7,62 мм"
     },
-    mn_buystat_shooting_range[][] =
+    mn_buystat_shooting_range[] =
     {
         35,
         35,
