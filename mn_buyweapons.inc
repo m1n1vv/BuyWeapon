@@ -83,7 +83,7 @@ static const
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 4, 6, 6
     };
 
-stock BuyWeapons(playerid, weaponid, price = 0, ammo = 0)
+stock BuyWeapons(playerid, weaponid, ammo = 0, price = 0)
 {
     new
         pack[20],
