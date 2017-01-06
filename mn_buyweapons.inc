@@ -12,7 +12,7 @@
 #endif
 
 #if  !defined MN__BW__DIALOG_PROOFE
-    #define MN__BW__DIALOG_PROOFE    MN__BW__DIALOG_WEAPONS_ID+1
+    #define MN__BW__DIALOG_PROOFE               MN__BW__DIALOG_WEAPONS_ID+1
 #endif
 
 #if  !defined MN__BW__COLOR_RED
@@ -98,7 +98,7 @@ stock BuyWeapons(playerid, weaponid, ammo = 0, price = 0)
     if (!price) 
         mn__price[playerid] = price = mn__buystat_price[weaponid];
     if (!ammo) 
-         mn__ammunition[playerid] = ammo = mn__buystat_ammunition[weaponid];
+        mn__ammunition[playerid] = ammo = mn__buystat_ammunition[weaponid];
 
     strunpack(pack, mn__buystat_caliber[weaponid]);
     format(string, sizeof string, mn__str, 
