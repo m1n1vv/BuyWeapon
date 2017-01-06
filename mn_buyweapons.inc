@@ -151,7 +151,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 return ShowPlayerDialog(playerid, MN__BW__DIALOG_PROOFE, DIALOG_STYLE_MSGBOX, !"Внимание!", str, "Да", "Закрыть");
             }
         }
-        printf("\n");
 
         return Buy(playerid);
     }
