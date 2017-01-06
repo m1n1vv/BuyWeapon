@@ -35,7 +35,7 @@ static const
     mn__str[] =
         "Оружие:\t\t\t%s\n\n\
         Калибр:\t\t\t%s\n\
-        Патронов в обойме:\t\t%i\n\
+        Патроны:\t\t%i\n\
         Дальность стрельбы:\t\t%i метров\n\
         Цена:\t\t\t\t$%i",
     mn__buystat_caliber[13][] =
