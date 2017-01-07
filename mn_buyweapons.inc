@@ -3,6 +3,12 @@
 #endif
 #define MN__BW__INCLUDED
 
+//Блокировка проверки на замену оружия
+//#define BW__KEY__REPEAT   
+
+//Блокировка сброса патронов при покупке       
+//#define BW__KEY__RESET_AMMO    
+
 #if !defined MN__BW__MAX_WEAPON_NAME
     #define MN__BW__MAX_WEAPON_NAME             (19)
 #endif
@@ -21,14 +27,13 @@
 
 #if  !defined MN__BW__COLOR_GREEN
     #define MN__BW__COLOR_GREEN                 0x33AA33AA
-#endif
+#endif               
 
 static
     mn__weaponid[MAX_PLAYERS char],
     mn__ammunition[MAX_PLAYERS],
     mn__slot[MAX_PLAYERS char],
     mn__price[MAX_PLAYERS],
-    mn__old_weapon_name[MN__BW__MAX_WEAPON_NAME],
     mn__new_weapon_name[MN__BW__MAX_WEAPON_NAME];
 
 static const
@@ -96,9 +101,12 @@ stock BuyWeapons(playerid, weaponid, ammo = 0, price = 0)
 
     weaponid -= 22;
     if (!price) 
-        mn__price[playerid] = price = mn__buystat_price[weaponid];
+        price = mn__buystat_price[weaponid];
     if (!ammo) 
-        mn__ammunition[playerid] = ammo = mn__buystat_ammunition[weaponid];
+        ammo = mn__buystat_ammunition[weaponid];
+
+    mn__price[playerid] = price;
+    mn__ammunition[playerid] = ammo;
 
     strunpack(pack, mn__buystat_caliber[weaponid]);
     format(string, sizeof string, mn__str, 
@@ -108,7 +116,7 @@ stock BuyWeapons(playerid, weaponid, ammo = 0, price = 0)
         mn__buystat_shooting_range[weaponid],
         price
     );
-    
+
     return ShowPlayerDialog(playerid, MN__BW__DIALOG_WEAPONS_ID, DIALOG_STYLE_MSGBOX, !"Покупка оружия", string, !"Купить", !"Закрыть");
 }
 
@@ -116,13 +124,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
     if (dialogid == MN__BW__DIALOG_WEAPONS_ID)
     {
+        if (!response)
+            return SendClientMessage(playerid, MN__BW__COLOR_RED, !"Покупка отклонена");
+
+        #if !defined BW__KEY__REPEAT
+
         new
+            mn__old_weapon_name[MN__BW__MAX_WEAPON_NAME],
             mn_player_slot[7],
             mn__player_weapons[7],
             mn_player_ammo[7];
-
-        if (!response)
-            return SendClientMessage(playerid, MN__BW__COLOR_RED, !"Покупка отклонена");
 
         GetWeaponName(mn__weaponid{playerid}, mn__new_weapon_name, MN__BW__MAX_WEAPON_NAME);
 
@@ -142,7 +153,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     RES = 36;
 
                 new
-                    str[RES] = !"У Вас уже есть оружие в этом слоте\nПри подтверждении все патроны старого оружия удалятся\n\nЗаменить ";
+                    str[RES] = !"У Вас уже есть оружие в этом слоте.\nПри подтверждении все патроны старого оружия удалятся.\n\nЗаменить ";
                 strcat(str, mn__old_weapon_name);
                 strcat(str, !" на ");
                 strcat(str, mn__new_weapon_name);
@@ -152,6 +163,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
         }
 
+        #endif
+        
         return Buy(playerid);
     }
     else if (dialogid == MN__BW__DIALOG_PROOFE)
@@ -165,15 +178,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 #endif
     return 0;
 }
-#if  defined _ALS_OnDialogResponse
-    #undef OnDialogResponse
-#else
-    #define _ALS_OnDialogResponse
-#endif
-#define OnDialogResponse MN__BW__OnDialogResponse
-#if  defined MN__BW__OnDialogResponse
-    forward MN__BW__OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
-#endif
+
+static stock Buy(playerid)
+{
+    if (GetPlayerMoney(playerid) < mn__price[playerid])
+        return SendClientMessage(playerid, MN__BW__COLOR_RED, !"У Вас недостаточно средств");
+
+    GivePlayerMoney(playerid, -mn__price[playerid]);
+    #if !defined BW__KEY__RESET_AMMO
+    GivePlayerWeapon(playerid, mn__weaponid{playerid}, 1);
+    SetPlayerAmmo(playerid, mn__weaponid{playerid}, 0);
+    #endif
+    GivePlayerWeapon(playerid, mn__weaponid{playerid}, mn__ammunition[playerid]);
+
+    return SendClientMessage(playerid, MN__BW__COLOR_GREEN, !"Вы успешно совершили покупку");
+}
 
 public OnPlayerDisconnect(playerid, reason)
 {
@@ -186,6 +205,17 @@ public OnPlayerDisconnect(playerid, reason)
 #endif
     return 1;
 }
+
+#if  defined _ALS_OnDialogResponse
+    #undef OnDialogResponse
+#else
+    #define _ALS_OnDialogResponse
+#endif
+#define OnDialogResponse MN__BW__OnDialogResponse
+#if  defined MN__BW__OnDialogResponse
+    forward MN__BW__OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
+#endif
+
 #if  defined _ALS_OnPlayerDisconnect
     #undef OnPlayerDisconnect
 #else
@@ -196,20 +226,7 @@ public OnPlayerDisconnect(playerid, reason)
     forward MN__BW__OnPlayerDisconnect(playerid, reason);
 #endif
 
-static stock Buy(playerid)
-{
-    if (GetPlayerMoney(playerid) < mn__price[playerid])
-        return SendClientMessage(playerid, MN__BW__COLOR_RED, !"У Вас недостаточно средств");
-
-    GivePlayerMoney(playerid, -mn__price[playerid]);
-    GivePlayerWeapon(playerid, mn__weaponid{playerid}, 1);
-    SetPlayerAmmo(playerid, mn__weaponid{playerid}, 0);
-    GivePlayerWeapon(playerid, mn__weaponid{playerid}, mn__ammunition[playerid]);
-
-    return SendClientMessage(playerid, MN__BW__COLOR_GREEN, !"Вы успешно совершили покупку");
-}
-
 /*
 by m1n1vv
-Version: 0.4.1
+Version: 0.4.2
 */
