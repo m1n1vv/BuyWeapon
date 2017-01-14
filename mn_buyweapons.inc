@@ -141,7 +141,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         for (new i = 2; i < 7; i++)
         {
             GetPlayerWeaponData(playerid, i, player_weapons, player_ammo);
-            printf("%i | [mn_player_slot %i] [player_weapons %i] [player_ammo %i]", i, i, player_weapons, player_ammo);
 
             if (player_weapons == player_weaponid && player_ammo)
                 return SendClientMessage(playerid, MN__BW__COLOR_RED, !"У Вас уже есть это оружие");
