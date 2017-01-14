@@ -14,10 +14,9 @@ public OnPlayerPickUpPickup(playerid, pickupid)
         if (pickupid == pickup)
         {
                 ShowPlayerDialog(playerid, 68, DIALOG_STYLE_LIST, !"Покупка оружия", !"Silenced 9mm\n\
-                        Combat Shotgun\n\
+                        Sniper Rifle\n\
                         Micro SMG/Uz\n\
-                        M4\n\
-                        Sniper Rifle", !"Купить", !"Отмена");
+                        M4", !"Купить", !"Отмена");
         }
         return 1;
 }
