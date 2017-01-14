@@ -3,6 +3,14 @@
 #endif
 #define MN__BW__INCLUDED
 
+#if defined BW__KEY__REPEAT
+    #error symbol already defined: "W__KEY__REPEAT"
+#endif
+
+#if defined  BW__KEY__RESET_AMMO
+    #error symbol already defined: "BW__KEY__RESET_AMMO"
+#endif
+
 //Блокировка проверки на замену оружия
 //#define BW__KEY__REPEAT
 
