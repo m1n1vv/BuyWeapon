@@ -4,7 +4,7 @@
 #define MN__BW__INCLUDED
 
 #if defined BW__KEY__REPEAT
-    #error symbol already defined: "W__KEY__REPEAT"
+    #error symbol already defined: "ВW__KEY__REPEAT"
 #endif
 
 #if defined  BW__KEY__RESET_AMMO
