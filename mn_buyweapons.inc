@@ -111,10 +111,10 @@ stock BuyWeapons(playerid, weaponid, ammo = 0, price = 0)
         price = mn__buystat_price[weaponid];
     if (!ammo) 
         ammo = mn__buystat_ammunition[weaponid];
+    mn__slot{playerid} = mn__weapon_slot_id[weaponid];
 
     mn__price[playerid] = price;
     mn__ammo[playerid] = ammo;
-    mn__slot{playerid} = mn__weapon_slot_id[weaponid];
 
     strunpack(pack, mn__buystat_caliber[weaponid]);
     format(string, sizeof string, mn__str, 
