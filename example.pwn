@@ -23,11 +23,11 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
-        switch(dialogid)
+        switch (dialogid)
         {
                 case 68:
                 {
-                        switch(listitem)
+                        switch (listitem)
                         {
                                 case 0: BuyWeapons(playerid, 23); 
                                 //Silenced 9mm (игрок получит 9mm с указанным количеством патронов и ценой в include)
@@ -44,6 +44,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                                 //Если параметры price и ammo оставить без значения, то они примут значения указанные в include.
                         }
                 }
+                return 1;
         }
         return 0;
 }
