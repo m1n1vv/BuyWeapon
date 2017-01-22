@@ -4,7 +4,7 @@
 #define MN__BW__INCLUDED
 
 #if defined BW__KEY__REPEAT
-    #error symbol already defined: "ВW__KEY__REPEAT"
+    #error symbol already defined: "BW__KEY__REPEAT"
 #endif
 
 #if defined  BW__KEY__RESET_AMMO
@@ -12,10 +12,10 @@
 #endif
 
 //Блокировка проверки на замену оружия
-//#define BW__KEY__REPEAT
+#define BW__KEY__REPEAT
 
 //Блокировка сброса патронов при покупке
-//#define BW__KEY__RESET_AMMO
+#define BW__KEY__RESET_AMMO
 
 #if !defined MN__BW__MAX_WEAPON_NAME
     #define MN__BW__MAX_WEAPON_NAME             (19)
@@ -96,7 +96,7 @@ static const
         2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 4, 6, 6
     };
 
-stock BuyWeapons(playerid, weaponid, ammo = 0, price = 0)
+stock BuyWeapon(playerid, weaponid, ammo = 0, price = 0)
 {
     new
         pack[20],
@@ -107,11 +107,11 @@ stock BuyWeapons(playerid, weaponid, ammo = 0, price = 0)
     GetWeaponName(weaponid, mn__new_weapon_name[playerid], MN__BW__MAX_WEAPON_NAME);
 
     weaponid -= 22;
+    mn__slot{playerid} = mn__weapon_slot_id[weaponid];
     if (!price) 
         price = mn__buystat_price[weaponid];
     if (!ammo) 
         ammo = mn__buystat_ammunition[weaponid];
-    mn__slot{playerid} = mn__weapon_slot_id[weaponid];
 
     mn__price[playerid] = price;
     mn__ammo[playerid] = ammo;
@@ -141,21 +141,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             old_weapon_name[MN__BW__MAX_WEAPON_NAME],
             player_slot = mn__slot{playerid},
             player_weaponid = mn__weaponid{playerid},
-            player_weapons,
+            player_weapon,
             player_ammo;
 
         GetWeaponName(mn__weaponid{playerid}, mn__new_weapon_name[playerid], MN__BW__MAX_WEAPON_NAME);
 
         for (new i = 2; i < 7; i++)
         {
-            GetPlayerWeaponData(playerid, i, player_weapons, player_ammo);
+            GetPlayerWeaponData(playerid, i, player_weapon, player_ammo);
+            printf("%i | [mn_player_slot %i] [player_weapon %i] [player_ammo %i]", i, i, player_weapon, player_ammo);
 
-            if (player_weapons == player_weaponid && player_ammo)
+            if (player_weapon == player_weaponid && player_ammo)
                 return SendClientMessage(playerid, MN__BW__COLOR_RED, !"У Вас уже есть это оружие");
 
-            if (i == player_slot && player_weapons != player_weaponid && player_ammo)
+            if (i == player_slot && player_weapon != player_weaponid && player_ammo)
             {
-                GetWeaponName(player_weapons, old_weapon_name, sizeof old_weapon_name);
+                GetWeaponName(player_weapon, old_weapon_name, sizeof old_weapon_name);
 
                 new
                     str[36] = !"У Вас уже есть оружие в этом слоте.\nПри подтверждении все патроны старого оружия удалятся.\n\nЗаменить ";
@@ -164,9 +165,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 strcat(str, mn__new_weapon_name[playerid]);
                 strcat(str, !"?");
 
-                return ShowPlayerDialog(playerid, MN__BW__DIALOG_PROOFE, DIALOG_STYLE_MSGBOX, !"Внимание!", str, "Да", "Закрыть");
+                return ShowPlayerDialog(playerid, MN__BW__DIALOG_PROOFE, DIALOG_STYLE_MSGBOX, !"Внимание!", str, !"Да", !"Закрыть");
             }
         }
+
+        printf("\n");
 
         #endif
         
