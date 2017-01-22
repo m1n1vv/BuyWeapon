@@ -1,24 +1,26 @@
-![Image alt](http://pawn-wiki.ru/uploads/imgs/img_1466732388__bw-logo.png)
+![Image alt](http://pawn-wiki.ru/uploads/imgs/img_1485117009__img_1466732388__bw-logo.png)
 > ###Версия: 0.4.3###
 
-BuyWeapons - система покупки оружия. Все действия будут происходишь в двух диалоговых окнах. В основном выводится вся информация об оружии. Если во время покупки система определит, что у вас в этом же слоте уже есть оружие, то запустится второе диалоговое окно, которое предложит заменить.
+BuyWeapon - система покупки оружия. 
 
-Использование системы довольное простое. Достаточно в меню или пикап поставить функцию BuyWeapons с нужными параметрами. Ид оружия является обязательным, а количество патронов или цену можно ставить на свое усмотрение, или использовать указанные в инклуде.
+Все действия будут происходишь в двух диалоговых окнах. В основном выводится вся информация об оружии. Если во время покупки система определит, что у вас в этом же слоте уже есть оружие, то запустится второе диалоговое окно, которое предложит заменить.
+
+Использование системы довольное простое. Достаточно в меню или пикап поставить функцию BuyWeapon с нужными параметрами. Ид оружия является обязательным, а количество патронов или цену можно ставить на свое усмотрение, или использовать указанные в инклуде.
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=f72H9AEBAKUE" target="_blank"><img src="http://img.youtube.com/vi/f72H9AEBAKU/0.jpg" 
-alt="SA:MP Include BuyWeapons" width="240" height="180" border="10" /></a>
+alt="SA:MP Include BuyWeapon" width="240" height="180" border="10" /></a>
 
 Установка
 ---------
 ```pawn
-#include <mn_buyweapons>
+#include <mn_BuyWeapon>
 ```
 
 Параметры
 ---------
 > 
 > ```pawn
-BuyWeapons(playerid, weaponid, ammo, price);
+BuyWeapon(playerid, weaponid, ammo, price);
 ```
 > 
 > * **playerid** - id игрока
@@ -42,20 +44,20 @@ BuyWeapons(playerid, weaponid, ammo, price);
 
 switch (listitem)
 {
-        case 0: BuyWeapons(playerid, 23);
+        case 0: BuyWeapon(playerid, 23);
         //Silenced 9mm (игрок получит 9mm с указанным количеством патронов и ценой в include)
         
-        case 1: BuyWeapons(playerid, 34, .ammo = 100);
+        case 1: BuyWeapon(playerid, 34, .ammo = 100);
         //Sniper Rifle (игроку будет выдано 100 патронов для этого оружия по цене указанной в include)
         
-        case 2: BuyWeapons(playerid, 28, .price = 3000); 
+        case 2: BuyWeapon(playerid, 28, .price = 3000); 
         //Micro SMG/Uz (оружие будет стоить $3000 с количеством патронов указанных в include)
         
-        case 3: BuyWeapons(playerid, 31, 100, 3000); 
+        case 3: BuyWeapon(playerid, 31, 100, 3000); 
         //M4 (игрок получит M4 со 100 патронами за $3000)
 }
 ```
-Полная инструкция: [https://github.com/m1n1vv/.../example.pwn](https://github.com/m1n1vv/BuyWeapons/blob/master/example.pwn)
+Полная инструкция: [https://github.com/m1n1vv/.../example.pwn](https://github.com/m1n1vv/BuyWeapon/blob/master/example.pwn)
 Этапы развития
 --------------
 
@@ -63,7 +65,7 @@ switch (listitem)
 |:-:|:-:|:-:|:-:|
 |[**0.1.1**](https://github.com/m1n1vv/Pawn/blob/master/archive/buy-weapons-0.1.inc)|0.2 test|0.3.1|0.4.1|
 ||0.2.1|0.3.2|0.4.2|
-||0.2.2|0.3.3|[**0.4.3**](https://github.com/m1n1vv/BuyWeapons/blob/master/mn_buyweapons.inc)|
+||0.2.2|0.3.3|[**0.4.3**](https://github.com/m1n1vv/BuyWeapons/blob/master/mn_buyweapon.inc)|
 ||[**0.2.3**](https://github.com/m1n1vv/Pawn/blob/master/archive/buy-weapons-0.2.inc)|0.3.4|
 |||0.3.5|
 |||0.3.6|
