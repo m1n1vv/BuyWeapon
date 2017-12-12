@@ -21,3 +21,8 @@ alt="SA:MP Include BuyWeapon" width="240" height="180" border="10" /></a>
 ```pawn
 BuyWeapon(playerid, weaponid, ammo, price);
 ```
+
+> * **playerid** - id игрока
+> * **weaponid** - id оружия (с 22 по 34)
+> * **ammo** - количество патронов (необязательное)
+> * **price** - цена оружия (необязательное)
