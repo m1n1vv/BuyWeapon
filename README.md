@@ -26,3 +26,49 @@ BuyWeapon(playerid, weaponid, ammo, price);
 > * **weaponid** - id оружия (с 22 по 34)
 > * **ammo** - количество патронов (необязательное)
 > * **price** - цена оружия (необязательное)
+
+Ключи
+---------
+Данные макросы записаны в начале файла. Для активации их нужно раскомментировать.
+
+|Макрос|Описание|
+|---|---|
+|BW__KEY__REPEAT|Блокировка проверки на замену оружия|
+|BW__KEY__RESET_AMMO|Блокировка сброса патронов при покупке|
+
+
+Применение
+----------
+```pawn
+//Если параметры price и ammo оставить без значения, то они примут значения указанные в include.
+
+switch (listitem)
+{
+        case 0: BuyWeapon(playerid, 23);
+        //Silenced 9mm (игрок получит 9mm с указанным количеством патронов и ценой в include)
+        
+        case 1: BuyWeapon(playerid, 34, .ammo = 100);
+        //Sniper Rifle (игроку будет выдано 100 патронов для этого оружия по цене указанной в include)
+        
+        case 2: BuyWeapon(playerid, 28, .price = 3000); 
+        //Micro SMG/Uz (оружие будет стоить $3000 с количеством патронов указанных в include)
+        
+        case 3: BuyWeapon(playerid, 31, 100, 3000); 
+        //M4 (игрок получит M4 со 100 патронами за $3000)
+}
+```
+
+Полная инструкция: [https://github.com/m1n1vv/.../example.pwn](https://github.com/m1n1vv/BuyWeapon/blob/master/example.pwn)
+
+Этапы развития
+--------------
+|0.1|0.2|0.3|0.4|
+|:-:|:-:|:-:|:-:|
+|[**0.1.1**](https://github.com/m1n1vv/Pawn/blob/master/archive/buy-weapons-0.1.inc)|0.2 test|0.3.1|0.4.1|
+||0.2.1|0.3.2|0.4.2|
+||0.2.2|0.3.3|[**0.4.3**](https://github.com/m1n1vv/BuyWeapons/blob/master/mn_buyweapon.inc)|
+||[**0.2.3**](https://github.com/m1n1vv/Pawn/blob/master/archive/buy-weapons-0.2.inc)|0.3.4|
+|||0.3.5|
+|||0.3.6|
+|||0.3.6.1|
+|||[**0.3.6.2**](https://github.com/m1n1vv/Pawn/blob/master/archive/buy-weapons-0.3.inc)|
