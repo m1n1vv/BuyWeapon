@@ -19,5 +19,5 @@ alt="SA:MP Include BuyWeapon" width="240" height="180" border="10" /></a>
 Параметры
 ---------
 ```pawn
-stock BuyWeapon(playerid, weaponid, ammo, price);
+BuyWeapon(playerid, weaponid, ammo, price);
 ```
