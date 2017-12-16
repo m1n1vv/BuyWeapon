@@ -135,7 +135,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if (!response)
             return SendClientMessage(playerid, MN__BW__COLOR_RED, !"Покупка отклонена");
 
-        #if !defined BW__KEY__REPEAT
+#if !defined BW__KEY__REPEAT
 
         new
             old_weapon_name[MN__BW__MAX_WEAPON_NAME],
@@ -169,9 +169,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
         }
 
-        printf("\n");
-
-        #endif
+#endif
         
         return Buy(playerid);
     }
@@ -193,9 +191,9 @@ static stock Buy(playerid)
         return SendClientMessage(playerid, MN__BW__COLOR_RED, !"У Вас недостаточно средств");
 
     GivePlayerMoney(playerid, -mn__price[playerid]);
-    #if !defined BW__KEY__RESET_AMMO
+#if !defined BW__KEY__RESET_AMMO
     GivePlayerWeapon(playerid, mn__weaponid{playerid}, 1);
-    SetPlayerAmmo(playerid, mn__weaponid{playerid}, 0);
+SetPlayerAmmo(playerid, mn__weaponid{playerid}, 0);
     #endif
     GivePlayerWeapon(playerid, mn__weaponid{playerid}, mn__ammo[playerid]);
 
