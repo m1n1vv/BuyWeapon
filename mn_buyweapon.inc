@@ -193,8 +193,8 @@ static stock Buy(playerid)
     GivePlayerMoney(playerid, -mn__price[playerid]);
 #if !defined BW__KEY__RESET_AMMO
     GivePlayerWeapon(playerid, mn__weaponid{playerid}, 1);
-SetPlayerAmmo(playerid, mn__weaponid{playerid}, 0);
-    #endif
+    SetPlayerAmmo(playerid, mn__weaponid{playerid}, 0);
+#endif
     GivePlayerWeapon(playerid, mn__weaponid{playerid}, mn__ammo[playerid]);
 
     return SendClientMessage(playerid, MN__BW__COLOR_GREEN, !"Вы успешно совершили покупку");
