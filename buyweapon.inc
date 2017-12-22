@@ -23,10 +23,6 @@
 	#define BW__COLOR_GREEN                 0x33AA33AA
 #endif
 
-//#define BW__KEY__INFO
-//#define BW__KEY__REPEAT
-//#define BW__KEY__RESET_AMMO
-
 static
 	bw__weaponid[MAX_PLAYERS char],
 	bw__ammo[MAX_PLAYERS],
@@ -181,9 +177,9 @@ static stock WeaponRepeat(playerid)
 				str[36] = !"У Вас уже есть оружие в этом слоте.\n";
 
 #if !defined BW__KEY__RESET_AMMO
-			strcat(str, !"При подтверждении все патроны старого оружия удалятся.\n\n");
+			strcat(str, !"При подтверждении все патроны старого оружия удалятся.\n");
 #endif
-			strcat(str, !"Заменить ");
+			strcat(str, !"\nЗаменить ");
 			strcat(str, old_weapon_name);
 			strcat(str, !" на ");
 			strcat(str, bw__new_weapon_name[playerid]);
