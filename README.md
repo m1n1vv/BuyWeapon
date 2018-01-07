@@ -13,7 +13,7 @@ alt="SA:MP Include BuyWeapon" width="240" height="180" border="10" /></a>
 Установка
 ---------
 ```pawn
-#include <mn_BuyWeapon>
+#include <BuyWeapon>
 ```
 
 Параметры
