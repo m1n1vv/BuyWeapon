@@ -24,7 +24,6 @@
 #endif
 
 static
-	bw__caliber,
 	bw__weaponid[MAX_PLAYERS char],
 	bw__ammo[MAX_PLAYERS],
 	bw__slot[MAX_PLAYERS char],
@@ -94,13 +93,12 @@ stock BuyWeapon(playerid, weaponid, ammo = 0, price = 0)
 
 	bw__weaponid{playerid} = weaponid;
 	weaponid -= 22;
-	bw__caliber = bw__caliber_id[weaponid] - 1;
 	bw__slot{playerid} = bw__weapon_slot_id[weaponid];
 	price = bw__price[playerid] = (price == 0) ? (bw__buystat_price[weaponid]) : (price);
 	ammo = bw__ammo[playerid] = (ammo == 0) ? (bw__buystat_ammunition[weaponid]) : (ammo);
 
 #if !defined BW__KEY__INFO
-	strunpack(pack, bw__buystat_caliber[bw__caliber]);
+	strunpack(pack, bw__buystat_caliber[bw__caliber_id[weaponid] - 1]);
 	format(string, sizeof string, bw__str, 
 		bw__new_weapon_name[playerid],
 		pack,
@@ -242,5 +240,5 @@ public OnPlayerDisconnect(playerid, reason)
 
 /*
 by m1n1vv
-Version: 0.5
+Version: 0.5.2
 */
