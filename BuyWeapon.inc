@@ -24,6 +24,7 @@
 #endif
 
 static
+	bw__caliber,
 	bw__weaponid[MAX_PLAYERS char],
 	bw__ammo[MAX_PLAYERS],
 	bw__slot[MAX_PLAYERS char],
@@ -38,21 +39,18 @@ static const
 		Количество патронов:\t\t%i\n\
 		Дальность стрельбы:\t\t%i метров\n\
 		Цена:\t\t\t\t$%i",
-	bw__buystat_caliber[13][] =
+	bw__caliber_id[] =
 	{
-		!".45",
+		1, 1, 2, 3, 3, 3, 4, 4, 5, 6, 4, 5, 5
+	},
+	bw__buystat_caliber[][] =
+	{
 		!".45",
 		!".50",
 		!"12-й",
-		!"12-й",
-		!"12-й",
-		!"9x19 мм Парабеллум",
 		!"9x19 мм Парабеллум",
 		!"7,62 мм",
-		!"5,56x45 мм НАТО",
-		!"9x19 мм Парабеллум",
-		!"7,62 мм",
-		!"7,62 мм"
+		!"5,56x45 мм НАТО"
 	},
 	bw__buystat_shooting_range[] =
 	{
@@ -96,12 +94,13 @@ stock BuyWeapon(playerid, weaponid, ammo = 0, price = 0)
 
 	bw__weaponid{playerid} = weaponid;
 	weaponid -= 22;
+	bw__caliber = bw__caliber_id[weaponid] - 1;
 	bw__slot{playerid} = bw__weapon_slot_id[weaponid];
 	price = bw__price[playerid] = (price == 0) ? (bw__buystat_price[weaponid]) : (price);
 	ammo = bw__ammo[playerid] = (ammo == 0) ? (bw__buystat_ammunition[weaponid]) : (ammo);
 
 #if !defined BW__KEY__INFO
-	strunpack(pack, bw__buystat_caliber[weaponid]);
+	strunpack(pack, bw__buystat_caliber[bw__caliber]);
 	format(string, sizeof string, bw__str, 
 		bw__new_weapon_name[playerid],
 		pack,
